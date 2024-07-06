@@ -1,0 +1,19 @@
+for product in IntelliJIdea WebStorm DataGrip PhpStorm CLion PyCharm GoLand RubyMine; do
+    echo "[+] Resetting trial period for $product"
+
+    echo "[+] Removing Evaluation Key..."
+    rm -rf ~/Library/Preferences/$product*/eval 2> /dev/null
+
+    rm -rf ~/Library/Application\ Support/JetBrains/$product*/eval
+
+    echo "[+] Removing all evlsprt properties in options.xml..."
+    sed -i '' 's/evlsprt//' ~/Library/Preferences/$product*/options/other.xml 2> /dev/null
+
+    sed -i '' '/evlsprt/d' ~/Library/Application\ Support/JetBrains/$product*/options/other.xml
+
+
+    echo
+done
+
+echo "Removing userPrefs files..."
+rm -rf ~/Library/Preferences/.java/.userPrefs 2> /dev/null
